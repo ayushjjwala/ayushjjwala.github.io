@@ -42,11 +42,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNavClick = (id) => {
+    if (id === 'resume') {
+      window.open('/portfolio-ayush/ayush_resume.pdf', '_blank');
       setIsOpen(false);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setIsOpen(false);
+      }
     }
   };
 
@@ -57,10 +62,10 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <button 
-            onClick={() => scrollToSection('about')} 
+            onClick={() => handleNavClick('about')} 
             className="text-xl font-bold text-gray-800"
           >
-            Ayush J.
+            Ayush Jhunjhunwala
           </button>
 
           {/* Desktop Navigation */}
@@ -69,7 +74,7 @@ export default function Navbar() {
               {navItems.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleNavClick(item.id)}
                   className={`${
                     activeSection === item.id
                       ? 'text-blue-600 font-medium'

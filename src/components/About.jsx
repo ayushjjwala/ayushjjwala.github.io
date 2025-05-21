@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaFileDownload } from 'react-icons/fa';
 
 export default function About() {
   return (
@@ -26,20 +26,31 @@ export default function About() {
             </p>
             <div className="flex justify-center space-x-4">
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/ayushjjwala"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
+                title="GitHub Profile"
               >
                 <FaGithub size={24} />
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/ayushjhunjhunwala"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition-colors"
+                title="LinkedIn Profile"
               >
                 <FaLinkedin size={24} />
+              </a>
+              <a
+                href="/portfolio-ayush/ayush_resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+                title="Download Resume"
+              >
+                <FaFileDownload size={24} />
               </a>
             </div>
           </div>
