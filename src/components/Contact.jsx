@@ -1,61 +1,220 @@
 import { motion } from 'framer-motion';
-import { FaEnvelope, FaLinkedin } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaPaperPlane, FaRegEnvelope, FaRegUser, FaRegEdit } from 'react-icons/fa';
+
+// Email is encoded to prevent scraping
+const ENCODED_EMAIL = 'YXl1c2hqandhbGE5NEBnbWFpbC5jb20='; // Base64 encoded email
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [charCount, setCharCount] = useState(0);
+  const [emailError, setEmailError] = useState('');
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError('Email is required');
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      setEmailError('Please enter a valid email address');
+      return false;
+    }
+    setEmailError('');
+    return true;
+  };
+
+  const sanitizeInput = (str) => {
+    return str
+      .replace(/[<>]/g, '') // Remove < and > to prevent HTML injection
+      .replace(/[&]/g, 'and') // Replace & with 'and'
+      .replace(/['"\\]/g, '') // Remove quotes and backslashes
+      .trim();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, subject, message } = formData;
+
+    // Validate email before proceeding
+    if (!validateEmail(email)) {
+      return;
+    }
+
+    // Sanitize all inputs
+    const sanitizedName = sanitizeInput(name);
+    const sanitizedSubject = sanitizeInput(subject);
+    const sanitizedMessage = sanitizeInput(message);
+    const sanitizedEmail = email.trim().toLowerCase();
+
+    // Additional validation for message length
+    if (sanitizedMessage.length > 1000) {
+      alert('Message is too long. Please keep it under 1000 characters.');
+      return;
+    }
+
+    // Decode the email address for use
+    const recipientEmail = atob(ENCODED_EMAIL);
+    
+    // Create email body with formatted content
+    const emailBody = `
+Name: ${sanitizedName}
+Email: ${sanitizedEmail}
+
+Subject: ${sanitizedSubject}
+
+Message:
+${sanitizedMessage}
+    `.trim();
+    
+    const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(sanitizedSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.location.href = mailtoLink;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    
+    if (name === 'email') {
+      validateEmail(value);
+    }
+    
+    // Update character count for message field
+    if (name === 'message') {
+      const newCount = value.length;
+      setCharCount(newCount);
+      if (newCount > 1000) {
+        return; // Don't update state if message is too long
+      }
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-12">Get In Touch</h2>
-          <div className="max-w-2xl mx-auto">
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="flex items-center justify-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-              >
-                <FaEnvelope className="text-blue-600 text-xl" />
-                <a
-                  href="mailto:ayushjjwala94@gmail.com"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
-                >
-                  ayushjjwala94@gmail.com
-                </a>
-              </motion.div>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+          <p className="text-lg text-gray-600 mb-12">Have a question or want to work together?</p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="bg-white rounded-2xl shadow-lg p-8"
+          >
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaRegUser className="text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your Name"
+                    required
+                    maxLength={50}
+                    pattern="[A-Za-z\s]+"
+                    title="Please enter a valid name (letters and spaces only)"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white"
+                  />
+                </div>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <FaRegEnvelope className="text-gray-400" />
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your Email"
+                    required
+                    maxLength={100}
+                    className={`w-full pl-10 pr-4 py-3 border ${
+                      emailError ? 'border-red-500' : 'border-gray-200'
+                    } rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white`}
+                  />
+                  {emailError && (
+                    <p className="mt-1 text-sm text-red-500">{emailError}</p>
+                  )}
+                </div>
+              </div>
+              
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <FaRegEdit className="text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Subject"
+                  required
+                  maxLength={100}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white"
+                />
+              </div>
+              
+              <div className="relative">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your Message"
+                  required
+                  maxLength={1000}
+                  rows={6}
+                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white resize-none"
+                />
+                <div className={`text-sm mt-2 flex justify-between items-center ${
+                  charCount > 900 ? (charCount > 950 ? 'text-red-500' : 'text-yellow-500') : 'text-gray-500'
+                }`}>
+                  <span className="text-gray-500 text-xs">Press Enter ⏎ for new line</span>
+                  <span>{charCount}/1000 characters</span>
+                </div>
+              </div>
               
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex items-center justify-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="flex flex-col items-center space-y-4"
               >
-                <FaLinkedin className="text-blue-600 text-xl" />
-                <a
-                  href="https://linkedin.com/in/ayushjhunjhunwala"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-blue-600 transition-colors"
+                <button
+                  type="submit"
+                  className="group relative inline-flex items-center justify-center px-8 py-3 font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 overflow-hidden"
                 >
-                  linkedin.com/in/ayushjhunjhunwala
-                </a>
+                  <span className="relative flex items-center">
+                    <FaPaperPlane className="mr-2 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                    Send Message
+                  </span>
+                </button>
+                <p className="text-sm text-gray-500">
+                  Your message will be sent through your default email client
+                </p>
               </motion.div>
-            </div>
-            
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="mt-8 text-gray-600"
-            >
-              Feel free to reach out for collaborations or just a friendly chat!
-            </motion.p>
-          </div>
+            </form>
+          </motion.div>
         </motion.div>
       </div>
     </section>
