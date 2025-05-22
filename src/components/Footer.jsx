@@ -28,7 +28,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <div className="flex flex-wrap gap-4">
               <a href="#about" className="text-sm hover:text-white transition-colors">About</a>
-              <a href="#projects" className="text-sm hover:text-white transition-colors">Projects</a>
+              <a href="#experience" className="text-sm hover:text-white transition-colors">Experience</a>
               <a href="#skills" className="text-sm hover:text-white transition-colors">Skills</a>
               <a href="#contact" className="text-sm hover:text-white transition-colors">Contact</a>
             </div>

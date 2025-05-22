@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaFileDownload, FaEnvelope } from 'react-icons/fa';
-import headshot from '/HeadshotPro Avatar 2025-03-27T01-28-44-909Z.png';
+import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 // Email is encoded to prevent scraping
 const ENCODED_EMAIL = 'YXl1c2hqandhbGE5NEBnbWFpbC5jb20='; // Base64 encoded email
@@ -81,7 +80,7 @@ export default function About() {
             className="flex justify-center lg:justify-end"
           >
             <img
-              src={headshot}
+              src="/portfolio-ayush/Headshot.png"
               alt="Ayush Jhunjhunwala"
               className="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-xl border-4 border-white object-cover"
             />
