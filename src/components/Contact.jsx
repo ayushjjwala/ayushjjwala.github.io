@@ -101,22 +101,24 @@ ${sanitizedMessage}
   };
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-gray-50/50"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(59,130,246,0.1),transparent_25%),radial-gradient(circle_at_80%_70%,rgba(37,99,235,0.08),transparent_35%)]"></div>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-          <p className="text-lg text-gray-600 mb-12">Have a question or want to work together?</p>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-4 animate-gradient-x">Get In Touch</h2>
+          <p className="text-lg text-blue-700/80 mb-12">Have a question or want to work together?</p>
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-white rounded-2xl shadow-lg p-8"
+            className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 p-8 border border-gray-100"
           >
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
@@ -134,7 +136,7 @@ ${sanitizedMessage}
                     maxLength={50}
                     pattern="[A-Za-z\s]+"
                     title="Please enter a valid name (letters and spaces only)"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 hover:bg-gray-100 focus:bg-white"
+                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-gray-50/50 hover:bg-gray-100/50 focus:bg-white backdrop-blur-sm"
                   />
                 </div>
                 <div className="relative">
@@ -202,7 +204,7 @@ ${sanitizedMessage}
               >
                 <button
                   type="submit"
-                  className="group relative inline-flex items-center justify-center px-8 py-3 font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 overflow-hidden"
+                  className="group relative inline-flex items-center justify-center px-8 py-3 font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-300 overflow-hidden shadow-lg hover:shadow-xl hover:shadow-blue-200/50"
                 >
                   <span className="relative flex items-center">
                     <FaPaperPlane className="mr-2 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />

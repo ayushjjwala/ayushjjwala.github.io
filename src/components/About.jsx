@@ -12,8 +12,10 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="min-h-screen flex items-center justify-center py-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-gray-50 opacity-80"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(59,130,246,0.1),transparent_30%),radial-gradient(circle_at_70%_60%,rgba(37,99,235,0.08),transparent_40%)]"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content - Left Side */}
           <motion.div
@@ -22,10 +24,10 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="text-left"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-4 animate-gradient-x">
               Ayush Jhunjhunwala
             </h1>
-            <h2 className="text-xl md:text-2xl text-gray-600 mb-2">
+            <h2 className="text-xl md:text-2xl text-blue-700/80 font-medium mb-2">
               Python Developer | AI/ML Enthusiast
             </h2>
             <div className="flex items-center mb-8 text-gray-600">

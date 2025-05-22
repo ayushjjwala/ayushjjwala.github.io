@@ -139,7 +139,7 @@ export default function Publications() {
     : sortedPublications.slice(0, INITIAL_DISPLAY_COUNT);
 
   return (
-    <section id="publications" className="py-20 bg-white">
+    <section id="publications" className="py-20 bg-gradient-to-b from-white via-blue-50/30 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -147,26 +147,29 @@ export default function Publications() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Publications</h2>
-          <p className="text-lg text-gray-600">Research contributions in RNA structure analysis and bioinformatics</p>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-4 animate-gradient-x">Publications</h2>
+          <p className="text-lg text-blue-700/80">Research contributions in RNA structure analysis and bioinformatics</p>
         </motion.div>
 
-        <div className="space-y-6 relative">
+        <div className="space-y-6 relative backdrop-blur-sm">
           {/* Always visible publications */}
           {sortedPublications.slice(0, INITIAL_DISPLAY_COUNT).map((pub, index) => (
             <motion.div
               key={pub.title}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
+              transition={{ duration: 0.3, delay: index * 0.1 }}                className="group bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 hover:-translate-y-1"
             >
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 mt-1">
                   {pub.type === "Journal Article" ? (
-                    <FaBook className="text-blue-600 w-6 h-6" />
+                    <div className="p-3 rounded-lg bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                      <FaBook className="text-blue-600 w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                    </div>
                   ) : (
-                    <FaQuoteRight className="text-green-600 w-6 h-6" />
+                    <div className="p-3 rounded-lg bg-green-50 group-hover:bg-green-100 transition-colors">
+                      <FaQuoteRight className="text-green-600 w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+                    </div>
                   )}
                 </div>
                 <div className="flex-grow">
@@ -272,7 +275,7 @@ export default function Publications() {
             >
               <motion.button
                 onClick={handleToggle}
-                className="inline-flex items-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-md hover:shadow-lg"
+                className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white rounded-lg transition-all duration-300 font-medium shadow-md hover:shadow-xl hover:shadow-blue-200/50"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
