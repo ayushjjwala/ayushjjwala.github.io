@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { FaBook, FaExternalLinkAlt, FaQuoteRight, FaChevronDown, FaChevronUp, FaEye } from 'react-icons/fa';
+import { FaBook, FaQuoteRight, FaChevronDown, FaChevronUp, FaEye } from 'react-icons/fa';
 
 const publications = [
   {
@@ -65,9 +65,58 @@ const publications = [
 const sortedPublications = [...publications].sort((a, b) => b.year - a.year);
 const INITIAL_DISPLAY_COUNT = 3;
 
+const containerVariants = {
+  hidden: { opacity: 0, height: 0 },
+  visible: { 
+    opacity: 1, 
+    height: "auto",
+    transition: {
+      height: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      },
+      opacity: {
+        duration: 0.3
+      }
+    }
+  },
+  exit: { 
+    opacity: 0,
+    height: 0,
+    transition: {
+      height: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      },
+      opacity: {
+        duration: 0.2
+      }
+    }
+  }
+};
+
 export default function Publications() {
   const [showAll, setShowAll] = useState(false);
   
+  const handleToggle = () => {
+    setShowAll(!showAll);
+    
+    if (showAll) {
+      // Wait for the animation to complete before scrolling
+      setTimeout(() => {
+        const publicationsSection = document.getElementById('publications');
+        if (publicationsSection) {
+          window.scrollTo({
+            top: publicationsSection.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+      }, 100); // Small delay to let the collapse animation start
+    }
+  };
+
   // Reset showAll state when user navigates away
   useEffect(() => {
     const handleScroll = () => {
@@ -102,57 +151,117 @@ export default function Publications() {
           <p className="text-lg text-gray-600">Research contributions in RNA structure analysis and bioinformatics</p>
         </motion.div>
 
-        <div className="space-y-6">
-          <AnimatePresence>
-            {displayedPublications.map((pub, index) => (
-              <motion.div
-                key={pub.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 mt-1">
-                    {pub.type === "Journal Article" ? (
-                      <FaBook className="text-blue-600 w-6 h-6" />
-                    ) : (
-                      <FaQuoteRight className="text-green-600 w-6 h-6" />
-                    )}
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
-                      {pub.title}
-                    </h3>
-                    <p className="text-gray-600 mb-3 font-mono text-sm tracking-tight">
-                      {pub.authors}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-3 text-sm">
-                      <span className={`px-3 py-1 rounded-full ${
-                        pub.type === "Journal Article" 
-                          ? "bg-blue-100 text-blue-800" 
-                          : "bg-green-100 text-green-800"
-                      }`}>
-                        {pub.journal}
-                      </span>
-                      <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full">
-                        {pub.year}
-                      </span>
-                      <a
-                        href={pub.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="View Publication"
-                        className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors ml-auto p-2 hover:bg-blue-50 rounded-full"
-                      >
-                        <FaEye className="w-5 h-5" />
-                      </a>
-                    </div>
+        <div className="space-y-6 relative">
+          {/* Always visible publications */}
+          {sortedPublications.slice(0, INITIAL_DISPLAY_COUNT).map((pub, index) => (
+            <motion.div
+              key={pub.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
+            >
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 mt-1">
+                  {pub.type === "Journal Article" ? (
+                    <FaBook className="text-blue-600 w-6 h-6" />
+                  ) : (
+                    <FaQuoteRight className="text-green-600 w-6 h-6" />
+                  )}
+                </div>
+                <div className="flex-grow">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                    {pub.title}
+                  </h3>
+                  <p className="text-gray-600 mb-3 font-mono text-sm tracking-tight">
+                    {pub.authors}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3 text-sm">
+                    <span className={`px-3 py-1 rounded-full ${
+                      pub.type === "Journal Article" 
+                        ? "bg-blue-100 text-blue-800" 
+                        : "bg-green-100 text-green-800"
+                    }`}>
+                      {pub.journal}
+                    </span>
+                    <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full">
+                      {pub.year}
+                    </span>
+                    <a
+                      href={pub.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title="View Publication"
+                      className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors ml-auto p-2 hover:bg-blue-50 rounded-full"
+                    >
+                      <FaEye className="w-5 h-5" />
+                    </a>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Expandable publications */}
+          <AnimatePresence initial={false}>
+            {showAll && (
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="space-y-6 origin-top"
+              >
+                {sortedPublications.slice(INITIAL_DISPLAY_COUNT).map((pub, index) => (
+                  <motion.div
+                    key={pub.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 mt-1">
+                        {pub.type === "Journal Article" ? (
+                          <FaBook className="text-blue-600 w-6 h-6" />
+                        ) : (
+                          <FaQuoteRight className="text-green-600 w-6 h-6" />
+                        )}
+                      </div>
+                      <div className="flex-grow">
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2 leading-tight">
+                          {pub.title}
+                        </h3>
+                        <p className="text-gray-600 mb-3 font-mono text-sm tracking-tight">
+                          {pub.authors}
+                        </p>
+                        <div className="flex flex-wrap items-center gap-3 text-sm">
+                          <span className={`px-3 py-1 rounded-full ${
+                            pub.type === "Journal Article" 
+                              ? "bg-blue-100 text-blue-800" 
+                              : "bg-green-100 text-green-800"
+                          }`}>
+                            {pub.journal}
+                          </span>
+                          <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full">
+                            {pub.year}
+                          </span>
+                          <a
+                            href={pub.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="View Publication"
+                            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors ml-auto p-2 hover:bg-blue-50 rounded-full"
+                          >
+                            <FaEye className="w-5 h-5" />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
-            ))}
+            )}
           </AnimatePresence>
 
           {sortedPublications.length > INITIAL_DISPLAY_COUNT && (
@@ -161,9 +270,11 @@ export default function Publications() {
               animate={{ opacity: 1 }}
               className="text-center mt-8"
             >
-              <button
-                onClick={() => setShowAll(!showAll)}
+              <motion.button
+                onClick={handleToggle}
                 className="inline-flex items-center px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium shadow-md hover:shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {showAll ? (
                   <>
@@ -172,11 +283,11 @@ export default function Publications() {
                   </>
                 ) : (
                   <>
-                    Show More
+                    Show More Publications
                     <FaChevronDown className="ml-2" />
                   </>
                 )}
-              </button>
+              </motion.button>
             </motion.div>
           )}
         </div>
