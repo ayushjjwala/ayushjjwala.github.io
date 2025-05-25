@@ -2,15 +2,38 @@ import { motion } from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const projects = [
-  {
-    title: 'AI-Powered Investment Platform',
-    description: 'A machine learning-based platform that analyzes market trends and provides investment recommendations using Python, FastAPI, and React.',
-    technologies: ['Python', 'FastAPI', 'React', 'PostgreSQL', 'Docker'],
-    github: '#',
-    demo: '#',
-    image: 'project-thumbnail.jpg'
-  },
-  // More projects can be added here
+    {
+      title: 'Energy Price Prediction',
+      description: "Spearheaded development of an advanced time series forecasting solution for ERCOT's day-ahead market. Led end-to-end implementation including API development, cloud storage integration, and UI design.",
+      technologies: ['Python', 'Django'],
+      github: '#',
+      demo: '#',
+      image: 'project-thumbnail.jpg'
+    },
+    {
+        title: 'Stack Detector',
+        description: 'Developed a web portal to identify and classify stacking interactions in RNA. The portal is built using Django web framework along with HTML, CSS and Javascript.',
+        technologies: ['Python', 'Django'],
+        github: '#',
+        demo: '#',
+        image: 'project-thumbnail.jpg'
+    },
+    {
+        title: 'QUARNA',
+        description: 'Developed a web portal to explore quartets in RNA. The portal is built using Django web framework along with Javascript and HTML. It is integrated with JSMOL applet for visualizing bio-molecules in 3D.',
+        technologies: ['Python', 'Django'],
+        github: '#',
+        demo: '#',
+        image: 'project-thumbnail.jpg'
+    },
+    {
+      title: 'Humor Recognition System',
+      description: 'Implemented a module in python to recognize humorous one-line texts using the stylistic features of humor and machine learning.',
+      technologies: ['Python', 'Django'],
+      github: '#',
+      demo: '#',
+      image: 'project-thumbnail.jpg'
+    },
 ];
 
 export default function Projects() {
@@ -25,7 +48,7 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-4xl font-bold text-center bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-4 animate-gradient-x">
-            Featured Projects
+            Personal Projects
           </h2>
           <p className="text-lg text-center text-blue-700/80 mb-12">Showcasing my recent work and innovations</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

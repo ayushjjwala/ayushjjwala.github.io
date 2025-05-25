@@ -147,7 +147,7 @@ export default function Publications() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-4 animate-gradient-x">Publications</h2>
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-gray-900 bg-clip-text text-transparent mb-4 animate-gradient-x">Research Publications</h2>
           <p className="text-lg text-blue-700/80">Research contributions in RNA structure analysis and bioinformatics</p>
         </motion.div>
 

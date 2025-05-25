@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { FaPython, FaDatabase, FaChartBar } from 'react-icons/fa';
-import { SiTableau, SiFastapi } from 'react-icons/si';
+import { SiTableau, SiFastapi, SiApacheairflow, SiReact, SiKubernetes } from 'react-icons/si';
 import { BsKanban } from 'react-icons/bs';
 
 const skills = [
@@ -10,19 +10,19 @@ const skills = [
     description: 'Advanced Python development including Django, Flask, and FastAPI'
   },
   {
-    name: 'FastAPI',
-    icon: SiFastapi,
-    description: 'Building high-performance APIs and microservices'
+    name: 'React',
+    icon: SiReact,
+    description: 'Building interactive UIs and single-page applications'
   },
   {
-    name: 'SQL',
-    icon: FaDatabase,
+    name: 'Kubernetes',
+    icon: SiKubernetes,
     description: 'Database design, optimization, and complex queries'
   },
   {
-    name: 'Tableau',
-    icon: SiTableau,
-    description: 'Data visualization and business intelligence'
+    name: 'Airflow',
+    icon: SiApacheairflow,
+    description: 'Workflow automation and orchestration'
   },
   {
     name: 'Project Management',
