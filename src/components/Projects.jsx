@@ -5,7 +5,7 @@ const projects = [
     {
       title: 'Energy Price Prediction',
       description: "Spearheaded development of an advanced time series forecasting solution for ERCOT's day-ahead market. Led end-to-end implementation including API development, cloud storage integration, and UI design.",
-      technologies: ['Python', 'Django'],
+      technologies: ['Python', 'FastAPI'],
       github: '#',
       demo: '#',
       image: 'project-thumbnail.jpg'

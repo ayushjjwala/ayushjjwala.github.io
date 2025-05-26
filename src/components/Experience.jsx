@@ -4,7 +4,7 @@ const experiences = [
   {
     company: 'JPMorgan Chase & Co.',
     title: 'Lead Software Engineer',
-    period: '2022 - Present',
+    period: 'Mar 2022 - Present',
     description: [
       'Developing and maintaining backend services using Python and FastAPI',
       'Working on high-performance data processing pipelines',
@@ -13,8 +13,8 @@ const experiences = [
   },
   {
     company: 'OpenInvest',
-    title: 'Software Developer',
-    period: '2020 - 2022',
+    title: 'Software Engineer',
+    period: 'Mar 2021 - Mar 2022',
     description: [
       'Built scalable investment management platforms',
       'Implemented automated trading systems',
@@ -23,8 +23,8 @@ const experiences = [
   },
   {
     company: 'Oracle',
-    title: 'Software Developer',
-    period: '2018 - 2020',
+    title: 'Application Developer',
+    period: 'Aug 2018 - Feb 2021',
     description: [
       'Developed cloud infrastructure solutions',
       'Implemented database optimization strategies',
@@ -34,7 +34,27 @@ const experiences = [
   {
     company: 'IIIT Hyderabad',
     title: 'Research Assistant',
-    period: '2016 - 2018',
+    period: 'Aug 2015 - May 2018',
+    description: [
+      'Conducted research in machine learning and AI',
+      'Published papers in international conferences',
+      'Developed prototype AI applications'
+    ]
+  },
+  {
+    company: 'RobusTest',
+    title: 'Product Engineer Intern',
+    period: 'May 2015 - Jul 2015',
+    description: [
+      'Conducted research in machine learning and AI',
+      'Published papers in international conferences',
+      'Developed prototype AI applications'
+    ]
+  },
+  {
+    company: 'Take Zero',
+    title: 'Product Engineer Intern',
+    period: 'Dec 2014 - Jan 2015',
     description: [
       'Conducted research in machine learning and AI',
       'Published papers in international conferences',
