@@ -57,7 +57,7 @@ export default function Navbar() {
 
   const handleNavClick = (id) => {
     if (id === 'resume') {
-      window.open('/portfolio-ayush/ayush_resume.pdf', '_blank');
+      window.open('./ayush_resume.pdf', '_blank');
       setIsOpen(false);
     } else {
       const element = document.getElementById(id);

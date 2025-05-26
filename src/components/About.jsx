@@ -82,7 +82,7 @@ export default function About() {
             className="flex justify-center lg:justify-end"
           >
             <img
-              src="/portfolio-ayush/Headshot.png"
+              src="./Headshot.png"
               alt="Ayush Jhunjhunwala"
               className="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-xl border-4 border-white object-cover"
             />
