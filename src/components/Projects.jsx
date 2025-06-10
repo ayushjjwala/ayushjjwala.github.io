@@ -3,6 +3,14 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const projects = [
     {
+      title: 'Reporting Agent',
+      description: "Developed an AI-powered agent that generates financial and ESG (Environmental, Social, and Governance) reports based on client data. The application uses a Streamlit frontend and a Flask MCP server with OpenAI integration.",
+      technologies: ['Python', 'Flask', 'Streamlit'],
+      github: '#',
+      demo: '#',
+      image: 'project-thumbnail.jpg'
+    },
+    {
       title: 'Energy Price Prediction',
       description: "Spearheaded development of an advanced time series forecasting solution for ERCOT's day-ahead market. Led end-to-end implementation including API development, cloud storage integration, and UI design.",
       technologies: ['Python', 'FastAPI'],
@@ -11,12 +19,12 @@ const projects = [
       image: 'project-thumbnail.jpg'
     },
     {
-        title: 'Stack Detector',
-        description: 'Developed a web portal to identify and classify stacking interactions in RNA. The portal is built using Django web framework along with HTML, CSS and Javascript.',
-        technologies: ['Python', 'Django'],
-        github: '#',
-        demo: '#',
-        image: 'project-thumbnail.jpg'
+      title: 'Humor Recognition System',
+      description: 'Implemented a module in python to recognize humorous one-line texts using the stylistic features of humor and machine learning.',
+      technologies: ['Python', 'Django'],
+      github: '#',
+      demo: '#',
+      image: 'project-thumbnail.jpg'
     },
     {
         title: 'QUARNA',
@@ -25,14 +33,6 @@ const projects = [
         github: '#',
         demo: '#',
         image: 'project-thumbnail.jpg'
-    },
-    {
-      title: 'Humor Recognition System',
-      description: 'Implemented a module in python to recognize humorous one-line texts using the stylistic features of humor and machine learning.',
-      technologies: ['Python', 'Django'],
-      github: '#',
-      demo: '#',
-      image: 'project-thumbnail.jpg'
     },
 ];
 
